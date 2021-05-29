@@ -45,5 +45,30 @@ namespace MyFirstUnitTests
         }
 
         #endregion
+
+
+        #region IsAnImmediateListTest
+
+        [Theory]
+        [InlineData("Name")]
+        [InlineData("Person.Name")]
+        [InlineData("Person.Names[Type]")]
+
+        public void IsAnImmediateList_ShouldReturnFalseIfPropertyDoesNotBeginWithAList(string propertyId)
+        {
+            _nestedListsHelper.IsAnImmediateList(propertyId).Should().BeFalse();
+        }
+
+        [Theory]
+        [InlineData("Names[Name]")]
+        [InlineData("Persons[Name.Type]")]
+        [InlineData("Persons[Names[Type]]")]
+
+        public void IsAnImmediateList_ShouldReturnTrueIfPropertyBeginsWithAList(string propertyId)
+        {
+            _nestedListsHelper.IsAnImmediateList(propertyId).Should().BeTrue();
+        }
+
+        #endregion
     }
 }

@@ -88,7 +88,7 @@ namespace DynamicFilter.Common.Helpers
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
             }
 
