@@ -70,5 +70,29 @@ namespace DynamicQueryUnitTests
         }
 
         #endregion
+
+
+        #region PropertyIdContainsListTest
+        
+        [Theory]
+        [InlineData("Names[Type]")]
+        [InlineData("PersonNames[Name.Type]")]
+        [InlineData("PersonNames[Names[Type]]")]
+        [InlineData("PersonName.Names[Type]")]
+        [InlineData("PersonName.Names[A.Type]")]
+        public void PropertyIdContainsListTest_ShouldReturnTrueIfThereExistsAListWithinIt(string propertyId)
+        {
+            _nestedListsHelper.PropertyIdContainsList(propertyId).Should().BeTrue();
+        }
+
+        [Theory]
+        [InlineData("Name")]
+        [InlineData("Name.Type")]
+        [InlineData("Name.Type.Type")]
+        public void PropertyIdContainsListTest_ShouldReturnFalseIfThereAreNoLists(string propertyId)
+        {
+            _nestedListsHelper.PropertyIdContainsList(propertyId).Should().BeFalse();
+        }
+        #endregion
     }
 }
