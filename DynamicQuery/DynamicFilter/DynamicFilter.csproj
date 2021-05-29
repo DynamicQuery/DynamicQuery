@@ -6,16 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Common\Helpers\INestedListsHelper.cs" />
-    <Compile Remove="Common\Helpers\NestedListsHelper.cs" />
-    <Compile Remove="Common\Helpers\OperationEqualityComparer.cs" />
-    <Compile Remove="Common\Helpers\OperationHelper.cs" />
-    <Compile Remove="Common\Helpers\PropertyIdHelper.cs" />
     <Compile Remove="Operations\Operation.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Common\Helpers\" />
   </ItemGroup>
 
 </Project>
