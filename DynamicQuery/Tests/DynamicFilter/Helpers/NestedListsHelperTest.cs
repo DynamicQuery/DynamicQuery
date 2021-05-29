@@ -4,7 +4,7 @@ using DynamicFilter.Common.Interfaces;
 using DynamicFilter.Common.Helpers;
 using System;
 
-namespace MyFirstUnitTests
+namespace DynamicQueryUnitTests
 {
     public class NestedListsHelperTest
     {
