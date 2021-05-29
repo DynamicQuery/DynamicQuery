@@ -1,4 +1,5 @@
 using DynamicFilter.Common.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,11 +13,26 @@ namespace DynamicFilter.Common.Helpers
         /// <inheritdoc/>
         public bool PropertyIdsAreAtSameNestedListScope(string firstPropertyId, string secondPropertyId)
         {
+
+            const int BRACKET_NOT_FOUND = -1;
             int indexOfFirstPropertyIdInnerOpenBracket = firstPropertyId.LastIndexOf("[");
             int indexOfFirstPropertyIdInnerCloseBracket = firstPropertyId.IndexOf("]");
 
             int indexOfSecondPropertyIdInnerOpenBracket = secondPropertyId.LastIndexOf("[");
             int indexOfSecondPropertyIdInnerCloseBracket = secondPropertyId.IndexOf("]");
+
+            
+            if (
+                new int[] 
+                { 
+                    indexOfFirstPropertyIdInnerOpenBracket,
+                    indexOfFirstPropertyIdInnerCloseBracket,
+                    indexOfSecondPropertyIdInnerOpenBracket,
+                    indexOfSecondPropertyIdInnerCloseBracket 
+                }
+                .Any(x => x.Equals(BRACKET_NOT_FOUND))
+            )
+                throw new ArgumentException("One of more propertyIds do not contain a list");
 
             bool propertyIdLeftIsMatch = firstPropertyId.Substring(0, indexOfFirstPropertyIdInnerOpenBracket) == secondPropertyId.Substring(0, indexOfSecondPropertyIdInnerOpenBracket);
             bool propertyIdRightIsMatch = firstPropertyId.Substring(indexOfFirstPropertyIdInnerCloseBracket + 1) == secondPropertyId.Substring(indexOfSecondPropertyIdInnerCloseBracket + 1);
