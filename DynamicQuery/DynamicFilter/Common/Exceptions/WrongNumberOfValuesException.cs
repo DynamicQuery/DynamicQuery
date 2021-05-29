@@ -4,20 +4,15 @@ using System;
 namespace DynamicFilter.Common.Exceptions
 {
     /// <summary>
-    /// Represents an attempt to use an operation not currently supported by a type.
+    /// Represents an attempt to use an operation providing the wrong number of values.
     /// </summary>
     [Serializable]
-    public class UnsupportedOperationException : Exception
+    public class WrongNumberOfValuesException : Exception
     {
         /// <summary>
         /// Gets the <see cref="Operation" /> attempted to be used.
         /// </summary>
         public IOperation Operation { get; private set; }
-
-        /// <summary>
-        /// Gets name of the type.
-        /// </summary>
-        public string TypeName { get; private set; }
 
         /// <summary>
         /// Gets a message that describes the current exception.
@@ -26,19 +21,17 @@ namespace DynamicFilter.Common.Exceptions
         {
             get
             {
-                return string.Format("The type '{0}' does not have support for the operation '{1}'.", TypeName, Operation);
+                return string.Format("The operation '{0}' admits exactly '{1}' values (not more neither less than this).", Operation.Name, Operation.NumberOfValues);
             }
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UnsupportedOperationException" /> class.
+        /// Initializes a new instance of the <see cref="WrongNumberOfValuesException" /> class.
         /// </summary>
         /// <param name="operation">Operation used.</param>
-        /// <param name="typeName">Name of the type.</param>
-        public UnsupportedOperationException(IOperation operation, String typeName)
+        public WrongNumberOfValuesException(IOperation operation)
         {
             Operation = operation;
-            TypeName = typeName;
         }
     }
 }
