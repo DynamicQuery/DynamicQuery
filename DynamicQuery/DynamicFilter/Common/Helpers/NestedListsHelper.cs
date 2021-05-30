@@ -46,18 +46,19 @@ namespace DynamicFilter.Common.Helpers
 
             foreach (IDynamicFilterStatement filterStatement in filterStatementGroup)
             {
+                string key = NON_LIST_KEY;
+
                 if (PropertyIdContainsList(filterStatement.PropertyId))
                 {
-                    string key = GetKeyForGroupingLists(filterStatement.PropertyId);
-
-                    if (!keyToListOfStatements.ContainsKey(key))
-                    {
-                        keyToListOfStatements[key] = new List<IDynamicFilterStatement>();
-                    }
-                    keyToListOfStatements[NON_LIST_KEY].Add(filterStatement);
-
+                    key = GetKeyForGroupingLists(filterStatement.PropertyId);
                 }
 
+                if (!keyToListOfStatements.ContainsKey(key))
+                {
+                    keyToListOfStatements[key] = new List<IDynamicFilterStatement>();
+                }
+                
+                keyToListOfStatements[key].Add(filterStatement);
             }
 
             return keyToListOfStatements.Select(d => d.Value).ToList();
