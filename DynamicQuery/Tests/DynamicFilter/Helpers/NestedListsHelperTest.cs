@@ -3,6 +3,8 @@ using FluentAssertions;
 using DynamicFilter.Common.Interfaces;
 using DynamicFilter.Common.Helpers;
 using System;
+using System.Collections.Generic;
+using DynamicFilter;
 
 namespace DynamicQueryUnitTests
 {
@@ -93,6 +95,43 @@ namespace DynamicQueryUnitTests
         {
             _nestedListsHelper.PropertyIdContainsList(propertyId).Should().BeFalse();
         }
+        #endregion
+
+        #region GroupFilterStatementsTest
+        
+        [Fact]
+        public void GroupFilterStatementsTest_ShouldGroupSimilar()
+        {
+            List<IDynamicFilterStatement> dynamicFilterStatementsOneGroup = new List<IDynamicFilterStatement>()
+            {
+                new DynamicFilterStatement<string> { PropertyId = "Person.PersonNames[Type]" },
+                new DynamicFilterStatement<string> { PropertyId = "Person.PersonNames[Type.A]" }
+
+            };
+
+            List<IDynamicFilterStatement> dynamicFilterStatementsTwoGroups = new List<IDynamicFilterStatement>()
+            {
+                new DynamicFilterStatement<string> { PropertyId = "Person.PersonNames[Type]" },
+                new DynamicFilterStatement<string> { PropertyId = "Person.PersonNames[Type.A]" },
+                new DynamicFilterStatement<string> { PropertyId = "Person.DateOfBirth" }
+
+            };
+
+            List<IDynamicFilterStatement> dynamicFilterStatementsThreeGroups = new List<IDynamicFilterStatement>()
+            {
+                new DynamicFilterStatement<string> { PropertyId = "Persons[PersonNames[Type]]" },
+                new DynamicFilterStatement<string> { PropertyId = "Person.PersonNames[Type]" },
+                new DynamicFilterStatement<string> { PropertyId = "Person.PersonNames[Type.A]" },
+                new DynamicFilterStatement<string> { PropertyId = "Person.DateOfBirth" },
+                new DynamicFilterStatement<string> { PropertyId = "Persons[PersonNames[Alias]]" },
+
+            };
+
+            _nestedListsHelper.GroupFilterStatements(dynamicFilterStatementsOneGroup).Count.Should().Equals(1);
+            _nestedListsHelper.GroupFilterStatements(dynamicFilterStatementsTwoGroups).Count.Should().Equals(2);
+            _nestedListsHelper.GroupFilterStatements(dynamicFilterStatementsThreeGroups).Count.Should().Equals(3);
+        }
+
         #endregion
     }
 }
