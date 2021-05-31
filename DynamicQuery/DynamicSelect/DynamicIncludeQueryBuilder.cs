@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DynamicSelect
 {
-    public class IncludeQueryBuilder
+    public class DynamicIncludeQueryBuilder
     {
         public IEnumerable<string> Build(Node node)
         {
@@ -43,7 +43,7 @@ namespace DynamicSelect
             }
             else
             {
-                return new string[] { string.Empty };
+                return new string[] {  };
             }
         }
     }

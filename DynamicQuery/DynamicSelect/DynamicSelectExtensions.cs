@@ -17,7 +17,7 @@ namespace DynamicSelect
                 root.Add(propertyId);
             }
 
-            IncludeQueryBuilder includeQueryBuilder = new IncludeQueryBuilder();
+            DynamicIncludeQueryBuilder includeQueryBuilder = new DynamicIncludeQueryBuilder();
             List<string> includes = includeQueryBuilder.Build(root).ToList();
             includes.ForEach(include =>
             {
