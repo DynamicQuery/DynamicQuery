@@ -36,6 +36,14 @@ namespace Tests.DynamicFilter.Integration
             _persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
         }
 
+        [Fact]
+        public void SimpleLevel2ListPropertyFilterTest()
+        {
+            DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
+            dynamicFilter.By("Departments[Name]", Operations.EqualTo, "HR");
+
+            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
+        }
 
 
         private List<Person> Seed()
