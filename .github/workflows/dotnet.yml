@@ -25,4 +25,4 @@ jobs:
       working-directory: DynamicQuery/DynamicQuery/
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: DynamicQuery/DynamicQuery/
+      working-directory: DynamicQuery/DynamicQuery/Tests/
