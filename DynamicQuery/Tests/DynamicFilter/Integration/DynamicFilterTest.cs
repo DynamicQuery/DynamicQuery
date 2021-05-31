@@ -103,6 +103,36 @@ namespace Tests.DynamicFilter.Integration
         }
 
 
+        [Fact]
+        public void MultipleLevel3ListPropertyFilterTest()
+        {
+            DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
+            dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "HR");
+            dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "IT", Connector.And);
+            _persons.Where(dynamicFilter).ToList().Count.Should().Be(0);
+
+            dynamicFilter = new DynamicFilter<Person>();
+            dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "HR");
+            dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "IT", Connector.Or);
+            _persons.Where(dynamicFilter).ToList().Count.Should().Be(2);
+        }
+
+        //[Fact]
+        //public void ComplexMultiplePropertyFilterTest()
+        //{
+        //    DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
+        //    dynamicFilter.By("Departments[Sections[Name]]", Operations.EqualTo, "HR");
+        //    dynamicFilter.By("Departments[Sections[Name]]", Operations.EqualTo, "IT", Connector.And);
+        //    dynamicFilter.By("Departments[Sections[Name]]", Operations.EqualTo, "IT", Connector.And);
+        //    _persons.Where(dynamicFilter).ToList().Count.Should().Equals(0);
+
+
+        //    dynamicFilter = new DynamicFilter<Person>();
+        //    dynamicFilter.By("Departments[Sections[Name]]", Operations.EqualTo, "HR");
+        //    dynamicFilter.By("Departments[Sections[Name]]", Operations.EqualTo, "IT", Connector.Or);
+        //    _persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
+        //}
+
         private List<Person> Seed()
         {
             Person jane = new Person()
