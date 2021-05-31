@@ -1,5 +1,10 @@
 ﻿using System.Collections.Generic;
 using Tests.Common.Model;
+using Xunit;
+using DynamicFilter;
+using DynamicFilter.Operations;
+using System.Linq;
+using FluentAssertions;
 
 namespace Tests.DynamicFilter.Integration
 {
@@ -9,8 +14,29 @@ namespace Tests.DynamicFilter.Integration
 
         public DynamicFilterTest()
         {
-
+            _persons = Seed();
         }
+
+
+        [Fact]
+        public void SimpleObjectPropertyFilterTest()
+        {
+            DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
+            dynamicFilter.By("Gender", Operations.EqualTo, "F");
+
+            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
+        }
+
+        [Fact]
+        public void SimpleLevel2ObjectPropertyFilterTest()
+        {
+            DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
+            dynamicFilter.By("MyName.Name", Operations.Contains, "malfoy");
+
+            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
+        }
+
+
 
         private List<Person> Seed()
         {

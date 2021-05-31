@@ -1,4 +1,5 @@
 ﻿using DynamicFilter.Common.Interfaces;
+using ExpressionBuilderCore.Helpers;
 using System.Collections.Generic;
 
 namespace DynamicFilter.Operations
@@ -6,11 +7,11 @@ namespace DynamicFilter.Operations
     /// <summary>
     /// Exposes the default operations supported by the <seealso cref="Builders.FilterBuilder" />.
     /// </summary>
-    public static class Operation
+    public static class Operations
     {
         private static OperationHelper _operationHelper;
 
-        static Operation()
+        static Operations()
         {
             _operationHelper = new OperationHelper();
         }
