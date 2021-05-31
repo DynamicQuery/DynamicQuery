@@ -5,6 +5,7 @@ using DynamicFilter;
 using DynamicFilter.Operations;
 using System.Linq;
 using FluentAssertions;
+using DynamicFilter.Common;
 
 namespace Tests.DynamicFilter.Integration
 {
@@ -43,6 +44,20 @@ namespace Tests.DynamicFilter.Integration
             dynamicFilter.By("Departments[Name]", Operations.EqualTo, "HR");
 
             _persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
+        }
+
+        [Fact]
+        public void MultipleLevel2ObjectPropertyFilterTest()
+        {
+            DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
+            dynamicFilter.By("Gender", Operations.EqualTo, "F");
+            dynamicFilter.By("Gender", Operations.EqualTo, "M", Connector.And);
+            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(0);
+
+            dynamicFilter = new DynamicFilter<Person>();
+            dynamicFilter.By("Gender", Operations.EqualTo, "F");
+            dynamicFilter.By("Gender", Operations.EqualTo, "M", Connector.Or);
+            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
         }
 
 
