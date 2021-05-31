@@ -19,10 +19,10 @@ jobs:
         dotnet-version: 3.1.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: DynamicQuery/DynamicFilter/
+      working-directory: DynamicQuery/DynamicQuery.sln
     - name: Build
       run: dotnet build --no-restore
-      working-directory: DynamicQuery/DynamicQuery/
+      working-directory: DynamicQuery/DynamicQuery.sln
     - name: Test
       run: dotnet test --no-build --verbosity normal
       working-directory: DynamicQuery/Tests/
