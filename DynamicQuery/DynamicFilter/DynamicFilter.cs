@@ -180,7 +180,7 @@ namespace DynamicFilter
         /// <param name="filter"></param>
         public static implicit operator Func<TClass, bool>(DynamicFilter<TClass> filter)
         {
-            var builder = new FilterBuilder();
+            var builder = new DynamicFilterBuilder();
             return builder.GetExpression<TClass>(filter).Compile();
         }
 
@@ -190,7 +190,7 @@ namespace DynamicFilter
         /// <param name="filter"></param>
 	    public static implicit operator Expression<Func<TClass, bool>>(DynamicFilter<TClass> filter)
         {
-            var builder = new FilterBuilder();
+            var builder = new DynamicFilterBuilder();
             return builder.GetExpression<TClass>(filter);
         }
 

@@ -10,11 +10,11 @@ using System.Reflection;
 
 namespace DynamicFilter
 {
-    internal class FilterBuilder
+    internal class DynamicFilterBuilder
     {
         private readonly INestedListsHelper _nestedListHelper;
 
-        internal FilterBuilder()
+        internal DynamicFilterBuilder()
         {
             _nestedListHelper = new NestedListsHelper();
         }
