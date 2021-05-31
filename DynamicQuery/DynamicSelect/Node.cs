@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DynamicSelect
 {
@@ -89,4 +90,4 @@ namespace DynamicSelect
             ".[".All(c => !propertyId.Contains(c));
     }
 }
-}
+
