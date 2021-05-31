@@ -23,7 +23,6 @@ namespace DynamicFilter
         {
             var outerMostParam = Expression.Parameter(typeof(T), "x");
             Expression expression = null;
-            var connector = Connector.And;
 
             //StatementGroups are statements enclosed within brackets
             foreach (var statementGroup in filter.StatementGroups)
