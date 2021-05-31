@@ -60,6 +60,20 @@ namespace Tests.DynamicFilter.Integration
             _persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
         }
 
+        [Fact]
+        public void MultipleLevel2ListPropertyFilterTest()
+        {
+            DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
+            dynamicFilter.By("Departments[Name]", Operations.EqualTo, "HR");
+            dynamicFilter.By("Departments[Name]", Operations.EqualTo, "IT", Connector.And);
+            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(0);
+
+            dynamicFilter = new DynamicFilter<Person>();
+            dynamicFilter.By("Departments[Name]", Operations.EqualTo, "HR");
+            dynamicFilter.By("Departments[Name]", Operations.EqualTo, "IT", Connector.Or);
+            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
+        }
+
 
         private List<Person> Seed()
         {
