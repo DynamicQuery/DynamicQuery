@@ -9,7 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFilter", "DynamicFil
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicSelect", "DynamicSelect\DynamicSelect.csproj", "{92DA47F5-E1EA-4568-A323-B10FCE9F615D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{EFAD2971-5BF9-429E-93CD-92CF710C97AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{EFAD2971-5BF9-429E-93CD-92CF710C97AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{7A44C21E-BB57-43AB-B7F5-41FC82E3D3E1}"
+	ProjectSection(SolutionItems) = preProject
+		Images\DynamicFilter.jpg = Images\DynamicFilter.jpg
+		Images\DynamicQuery.jpg = Images\DynamicQuery.jpg
+		Images\DynamicSelect.jpg = Images\DynamicSelect.jpg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
