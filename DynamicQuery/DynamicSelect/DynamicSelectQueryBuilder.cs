@@ -16,14 +16,14 @@ namespace DynamicSelect
                     sb.Append(build);
                 }
 
-                string build2 = sb.ToString();
+                string build2 = sb.ToString().Trim();
                 build2 = build2.Substring(0, build2.Length - 1);
                 string ret = $"new {{ {build2 } }}";
-                return ret;
+                return ret.Trim();
             }
             else if (node.Type == Node.NodeType.PROPERTY) // leaf node
             {
-                string ret = $"{node.Projection.PropertyId} as {node.Projection.DisplayName},";
+                string ret = $"{node.Projection.PropertyId} as {node.Projection.DisplayName}, ";
                 return ret;
             }
             else if (node.Type == Node.NodeType.OBJECT)
@@ -35,9 +35,9 @@ namespace DynamicSelect
                     sb.Append(build);
                 }
 
-                string build2 = sb.ToString();
+                string build2 = sb.ToString().Trim();
                 build2 = build2.Substring(0, build2.Length - 1);
-                string ret = $"new {{ { build2} }} as {node.Projection.DisplayName},";
+                string ret = $"new {{ { build2} }} as {node.Projection.DisplayName}, ";
                 return ret;
             }
             else
@@ -49,9 +49,9 @@ namespace DynamicSelect
                     sb.Append(build);
                 }
 
-                string build2 = sb.ToString();
+                string build2 = sb.ToString().Trim();
                 build2 = build2.Substring(0, build2.Length - 1);
-                string ret = $"{node.Projection.DisplayName}.Select(new {{ {build2} }}) as {node.Projection.DisplayName},";
+                string ret = $"{node.Projection.DisplayName}.Select(new {{ {build2} }}) as {node.Projection.DisplayName}, ";
                 return ret;
             }
         }
