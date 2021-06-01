@@ -2,15 +2,15 @@
 
 namespace DynamicQuery.QueryBuilder.Connectors
 {
-    public class ProjectionBuilderConncetor
+    public class DynamicProjectionBuilderConnector
     {
-        public ProjectionBuilderConncetor(ProjectionBuilder projectionBuilder, DynamicQueryBuilder dynamicQueryBuilder)
+        public DynamicProjectionBuilderConnector(DynamicProjectionBuilder projectionBuilder, DynamicQueryBuilder dynamicQueryBuilder)
         {
             And = projectionBuilder;
             Then = dynamicQueryBuilder;
         }
 
         public DynamicQueryBuilder Then { get; private set; }
-        public ProjectionBuilder And { get; set; }
+        public DynamicProjectionBuilder And { get; set; }
     }
 }
