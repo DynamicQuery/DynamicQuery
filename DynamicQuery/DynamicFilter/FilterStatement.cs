@@ -4,8 +4,6 @@ using DynamicFilter.Common.Interfaces;
 using ExpressionBuilderCore.Helpers;
 using System;
 using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Schema;
 
 namespace DynamicFilter
 {
@@ -141,6 +139,6 @@ namespace DynamicFilter
             }
         }
 
-        
+
     }
 }

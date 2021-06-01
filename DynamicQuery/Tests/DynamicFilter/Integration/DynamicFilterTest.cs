@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using DynamicFilter;
+using DynamicFilter.Common;
+using DynamicFilter.Operations;
+using FluentAssertions;
+using System.Collections.Generic;
+using System.Linq;
 using Tests.Common.Model;
 using Xunit;
-using DynamicFilter;
-using DynamicFilter.Operations;
-using System.Linq;
-using FluentAssertions;
-using DynamicFilter.Common;
 
 namespace Tests.DynamicFilter.Integration
 {

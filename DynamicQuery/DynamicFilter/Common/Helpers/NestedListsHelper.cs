@@ -9,7 +9,7 @@ namespace DynamicFilter.Common.Helpers
     {
         private const string NON_LIST_KEY = "NonLists";
 
-        
+
         /// <inheritdoc/>
         public bool PropertyIdsAreAtSameNestedListScope(string firstPropertyId, string secondPropertyId)
         {
@@ -21,14 +21,14 @@ namespace DynamicFilter.Common.Helpers
             int indexOfSecondPropertyIdInnerOpenBracket = secondPropertyId.LastIndexOf("[");
             int indexOfSecondPropertyIdInnerCloseBracket = secondPropertyId.IndexOf("]");
 
-            
+
             if (
-                new int[] 
-                { 
+                new int[]
+                {
                     indexOfFirstPropertyIdInnerOpenBracket,
                     indexOfFirstPropertyIdInnerCloseBracket,
                     indexOfSecondPropertyIdInnerOpenBracket,
-                    indexOfSecondPropertyIdInnerCloseBracket 
+                    indexOfSecondPropertyIdInnerCloseBracket
                 }
                 .Any(x => x.Equals(BRACKET_NOT_FOUND))
             )
@@ -57,7 +57,7 @@ namespace DynamicFilter.Common.Helpers
                 {
                     keyToListOfStatements[key] = new List<IDynamicFilterStatement>();
                 }
-                
+
                 keyToListOfStatements[key].Add(filterStatement);
             }
 

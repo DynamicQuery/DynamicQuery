@@ -93,7 +93,7 @@ namespace DynamicFilter
         }
         private Expression GetPartialExpression(ParameterExpression param, Connector connector, IEnumerable<IDynamicFilterStatement> statementGroup)
         {
-            List<List<IDynamicFilterStatement>> statementSets =_nestedListHelper.GroupFilterStatements(statementGroup);
+            List<List<IDynamicFilterStatement>> statementSets = _nestedListHelper.GroupFilterStatements(statementGroup);
             Expression expression = null;
 
             foreach (List<IDynamicFilterStatement> statementSet in statementSets)

@@ -1,7 +1,4 @@
-﻿using DynamicFilter.Common;
-using System.Xml.Serialization;
-
-namespace DynamicFilter.Common.Interfaces
+﻿namespace DynamicFilter.Common.Interfaces
 {
     /// <summary>
     /// Defines how a property should be filtered.

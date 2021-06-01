@@ -39,7 +39,7 @@ namespace Tests.DynamicSelect
             Node rootNode = new Node();
             Action<List<string>> addPropertyIdsAction = x => x.ForEach(y => rootNode.Add(y));
 
-            
+
             List<string> propertyIds = new List<string>()
             {
                 "PersonName.Name", "PersonName.Id",

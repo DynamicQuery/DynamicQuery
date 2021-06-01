@@ -1,10 +1,10 @@
-﻿using Xunit;
-using FluentAssertions;
-using DynamicFilter.Common.Interfaces;
+﻿using DynamicFilter;
 using DynamicFilter.Common.Helpers;
+using DynamicFilter.Common.Interfaces;
+using FluentAssertions;
 using System;
 using System.Collections.Generic;
-using DynamicFilter;
+using Xunit;
 
 namespace DynamicQueryUnitTests
 {
@@ -75,7 +75,7 @@ namespace DynamicQueryUnitTests
 
 
         #region PropertyIdContainsListTest
-        
+
         [Theory]
         [InlineData("Names[Type]")]
         [InlineData("PersonNames[Name.Type]")]
@@ -98,7 +98,7 @@ namespace DynamicQueryUnitTests
         #endregion
 
         #region GroupFilterStatementsTest
-        
+
         [Fact]
         public void GroupFilterStatementsTest_ShouldGroupSimilar()
         {
