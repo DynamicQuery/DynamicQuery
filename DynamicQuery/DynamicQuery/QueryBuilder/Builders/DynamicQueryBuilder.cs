@@ -1,4 +1,5 @@
-﻿using DynamicQuery.QueryBuilder.Models;
+﻿using DynamicQuery.QueryBuilder.Connectors;
+using DynamicQuery.QueryBuilder.Models;
 
 namespace DynamicQuery.QueryBuilder.Builders
 {
@@ -6,14 +7,14 @@ namespace DynamicQuery.QueryBuilder.Builders
     {
         private QueryLogic _screeningLogic;
 
-        public LogicBuilder()
+        public DynamicQueryBuilder()
         {
             _screeningLogic = new QueryLogic();
-            Filter = new QueryGroupBuilderTransiter(_screeningLogic.QueryGroups, this);
+            Filter = new QueryGroupBuilderConnector(_screeningLogic.QueryGroups, this);
             Select = new ProjectionBuilder(_screeningLogic.Projection, this);
         }
 
-        public QueryGroupBuilderTransiter Filter { get; set; }
+        public QueryGroupBuilderConnector Filter { get; set; }
         public ProjectionBuilder Select { get; private set; }
         public QueryLogic Builder() => _screeningLogic;
 
