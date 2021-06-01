@@ -34,7 +34,7 @@ namespace Tests.DynamicSelect
             result = GetResult(fieldsToSelect);
             result.Any().Should().BeTrue();
             result.ForEach(x => ((string)x.Gender).Should().NotBeNullOrEmpty());
-            result.ForEach(x => ((PersonName)x.MyName).Name.Should().NotBeNullOrEmpty());
+            result.ForEach(x => ((string)x.MyName.Name).Should().NotBeNullOrEmpty());
 
 
             fieldsToSelect = new List<string>()
@@ -45,8 +45,16 @@ namespace Tests.DynamicSelect
             result = GetResult(fieldsToSelect);
             result.Any().Should().BeTrue();
             result.ForEach(x => ((string)x.Gender).Should().NotBeNullOrEmpty());
-            result.ForEach(x => ((PersonName)x.MyName).Name.Should().NotBeNullOrEmpty());
-            result.ForEach(x => ((List<Department>)x.Departments).ForEach(d => d.Name.Should().NotBeNullOrEmpty()));
+            result.ForEach(x => ((string)x.MyName.Name).Should().NotBeNullOrEmpty());
+            result.ForEach(x =>
+            {
+                var departments = (IEnumerable<object>)x.Departments;
+                
+                foreach(dynamic department in departments)
+                {
+                    ((string)department.Name).Should().NotBeNullOrEmpty();
+                }
+            });
 
 
             fieldsToSelect = new List<string>()
@@ -57,9 +65,22 @@ namespace Tests.DynamicSelect
             result = GetResult(fieldsToSelect);
             result.Any().Should().BeTrue();
             result.ForEach(x => ((string)x.Gender).Should().NotBeNullOrEmpty());
-            result.ForEach(x => ((PersonName)x.MyName).Name.Should().NotBeNullOrEmpty());
-            result.ForEach(x => ((List<Department>)x.Departments).ForEach(d => d.Name.Should().NotBeNullOrEmpty()));
-            result.ForEach(x => ((List<Department>)x.Departments).ForEach(d => d.Sections.ForEach(s => s.Name.Should().NotBeNullOrEmpty())));
+            result.ForEach(x => ((string)x.MyName.Name).Should().NotBeNullOrEmpty());
+            result.ForEach(x =>
+            {
+                var departments = (IEnumerable<object>)x.Departments;
+
+                foreach (dynamic department in departments)
+                {
+                    ((string)department.Name).Should().NotBeNullOrEmpty();
+
+                    var sections = (IEnumerable<object>)department.Sections;
+                    foreach(dynamic section in sections)
+                    {
+                        ((string)section.Name).Should().NotBeNullOrEmpty();
+                    }
+                }
+            });
         }
 
         private List<dynamic> GetResult(List<string> fieldsToSelect)
