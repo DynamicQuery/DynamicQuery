@@ -16,7 +16,7 @@ namespace Tests.Common.Persistence.Configurations
             builder.Property(x => x.Name)
                 .IsRequired();
 
-            
+
         }
     }
 }

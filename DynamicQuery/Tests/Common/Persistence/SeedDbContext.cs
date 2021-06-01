@@ -22,7 +22,7 @@ namespace Tests.Common.Persistence
                 .ApplyConfiguration(new DepartmentConfiguration())
                 .ApplyConfiguration(new SectionConfiguration());
 
-            
+
             base.OnModelCreating(modelBuilder);
         }
 
