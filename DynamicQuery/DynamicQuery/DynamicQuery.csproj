@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DynamicFilter\DynamicFilter.csproj" />
+    <ProjectReference Include="..\DynamicSelect\DynamicSelect.csproj" />
+  </ItemGroup>
+
 </Project>
