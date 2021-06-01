@@ -88,6 +88,12 @@ namespace DynamicSelect
 
         private bool IsLeafProjection(string propertyId) =>
             ".[".All(c => !propertyId.Contains(c));
+
+
+        public override string ToString()
+        {
+            return $"Display:{Projection.DisplayName}, Pid:{Projection.PropertyId}";
+        }
     }
 }
 

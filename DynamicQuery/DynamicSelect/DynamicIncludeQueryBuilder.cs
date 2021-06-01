@@ -43,7 +43,7 @@ namespace DynamicSelect
             }
             else
             {
-                return new string[] {  };
+                return new string[] { string.Empty };
             }
         }
     }
