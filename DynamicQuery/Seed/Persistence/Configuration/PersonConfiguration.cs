@@ -1,22 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Tests.Common.Model;
+using Seed.Models;
 
-namespace Tests.Common.Persistence.Configurations
+namespace Seed.Persistence.Configuration
 {
-    public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
+    public class PersonConfiguration : IEntityTypeConfiguration<Person>
     {
-        public void Configure(EntityTypeBuilder<Department> builder)
+        public void Configure(EntityTypeBuilder<Person> builder)
         {
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
                 .IsRequired();
 
-            builder.Property(x => x.Name)
+            builder.Property(x => x.Gender)
                 .IsRequired();
-
-
         }
     }
 }

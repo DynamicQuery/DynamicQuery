@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Tests.Common.Model;
+using Seed.Models;
 
-namespace Tests.Common.Persistence.Configurations
+namespace Seed.Persistence.Configuration
 {
     public class PersonNameConfiguration : IEntityTypeConfiguration<PersonName>
     {

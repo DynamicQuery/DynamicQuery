@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.15" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.15" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.10" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -23,6 +21,7 @@
     <ProjectReference Include="..\DynamicFilter\DynamicFilter.csproj" />
     <ProjectReference Include="..\DynamicQuery\DynamicQuery.csproj" />
     <ProjectReference Include="..\DynamicSelect\DynamicSelect.csproj" />
+    <ProjectReference Include="..\Seed\Seed.csproj" />
   </ItemGroup>
 
 </Project>

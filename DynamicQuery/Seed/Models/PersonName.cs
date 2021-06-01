@@ -1,4 +1,4 @@
-﻿namespace Tests.Common.Model
+﻿namespace Seed.Models
 {
     public class PersonName
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Seed;
 using System;
-using Tests.Common.Persistence;
 
 namespace Tests.Common
 {

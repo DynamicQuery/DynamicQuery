@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tests.Common.Model
+namespace Seed.Models
 {
     public class Person
     {

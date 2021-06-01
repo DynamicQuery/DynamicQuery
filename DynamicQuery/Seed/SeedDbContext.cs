@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Seed.Models;
+using Seed.Persistence.Configuration;
 using System.Collections.Generic;
-using Tests.Common.Model;
-using Tests.Common.Persistence.Configurations;
 
-namespace Tests.Common.Persistence
+namespace Seed
 {
     public class SeedDbContext : DbContext
     {

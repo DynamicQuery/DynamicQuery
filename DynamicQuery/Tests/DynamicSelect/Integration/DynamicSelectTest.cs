@@ -1,17 +1,16 @@
 ﻿using DynamicSelect;
 using FluentAssertions;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using Tests.Common;
-using Tests.Common.Model;
 using Xunit;
 
 namespace Tests.DynamicSelect
 {
     public class DynamicSelectTest : AbstractTestBase
     {
-
 
         [Fact]
         public void DynamicSelect_Test()
@@ -63,6 +62,7 @@ namespace Tests.DynamicSelect
             };
 
             result = GetResult(fieldsToSelect);
+            
             result.Any().Should().BeTrue();
             result.ForEach(x => ((string)x.Gender).Should().NotBeNullOrEmpty());
             result.ForEach(x => ((string)x.MyName.Name).Should().NotBeNullOrEmpty());

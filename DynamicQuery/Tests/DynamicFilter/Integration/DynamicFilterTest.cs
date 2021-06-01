@@ -2,10 +2,10 @@
 using DynamicFilter.Common;
 using DynamicFilter.Operations;
 using FluentAssertions;
+using Seed.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Tests.Common;
-using Tests.Common.Model;
 using Xunit;
 
 namespace Tests.DynamicFilter.Integration
