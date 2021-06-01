@@ -4,20 +4,14 @@ using DynamicFilter.Operations;
 using FluentAssertions;
 using System.Collections.Generic;
 using System.Linq;
+using Tests.Common;
 using Tests.Common.Model;
 using Xunit;
 
 namespace Tests.DynamicFilter.Integration
 {
-    public class DynamicFilterTest
+    public class DynamicFilterTest : AbstractTestBase
     {
-        private List<Person> _persons;
-
-        public DynamicFilterTest()
-        {
-            _persons = Seed();
-        }
-
 
         [Fact]
         public void SimpleObjectPropertyFilterTest()
@@ -25,7 +19,7 @@ namespace Tests.DynamicFilter.Integration
             DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Gender", Operations.EqualTo, "F");
 
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
         }
 
         [Fact]
@@ -34,7 +28,7 @@ namespace Tests.DynamicFilter.Integration
             DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("MyName.Name", Operations.Contains, "malfoy");
 
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
         }
 
         [Fact]
@@ -43,7 +37,7 @@ namespace Tests.DynamicFilter.Integration
             DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Departments[Name]", Operations.EqualTo, "HR");
 
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
         }
 
         [Fact]
@@ -52,12 +46,12 @@ namespace Tests.DynamicFilter.Integration
             DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Gender", Operations.EqualTo, "F");
             dynamicFilter.By("Gender", Operations.EqualTo, "M", Connector.And);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(0);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(0);
 
             dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Gender", Operations.EqualTo, "F");
             dynamicFilter.By("Gender", Operations.EqualTo, "M", Connector.Or);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
         }
 
         [Fact]
@@ -66,12 +60,12 @@ namespace Tests.DynamicFilter.Integration
             DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Departments[Name]", Operations.EqualTo, "HR");
             dynamicFilter.By("Departments[Name]", Operations.EqualTo, "IT", Connector.And);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(0);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(0);
 
             dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Departments[Name]", Operations.EqualTo, "HR");
             dynamicFilter.By("Departments[Name]", Operations.EqualTo, "IT", Connector.Or);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
         }
 
 
@@ -81,25 +75,25 @@ namespace Tests.DynamicFilter.Integration
             DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Departments[Name]", Operations.EqualTo, "HR");
             dynamicFilter.By("MyName.Name", Operations.StartsWith, "Jane", Connector.And);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
 
             dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Departments[Name]", Operations.EqualTo, "ABCD");
             dynamicFilter.By("MyName.Name", Operations.StartsWith, "Jane", Connector.And);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(0);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(0);
 
 
             dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Departments[Name]", Operations.EqualTo, "ABCD");
             dynamicFilter.By("MyName.Name", Operations.StartsWith, "Jane", Connector.Or);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(1);
 
 
             dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Departments[Name]", Operations.EqualTo, "ABCD");
             dynamicFilter.By("MyName.Name", Operations.StartsWith, "Jane", Connector.Or);
             dynamicFilter.By("MyName.Name", Operations.EndsWith, "Malfoy", Connector.Or);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
         }
 
 
@@ -109,12 +103,12 @@ namespace Tests.DynamicFilter.Integration
             DynamicFilter<Person> dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "HR");
             dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "IT", Connector.And);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Be(0);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Be(0);
 
             dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "HR");
             dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "IT", Connector.Or);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Be(2);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Be(2);
         }
 
         [Fact]
@@ -124,14 +118,14 @@ namespace Tests.DynamicFilter.Integration
             dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "HR");
             dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "IT", Connector.And);
             dynamicFilter.By("MyName.Name", Operations.StartsWith, "Joe", Connector.And);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(0);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(0);
 
 
             dynamicFilter = new DynamicFilter<Person>();
             dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "HR");
             dynamicFilter.By("Departments[Sections[Name]]", Operations.StartsWith, "IT", Connector.Or);
             dynamicFilter.By("MyName.Name", Operations.StartsWith, "Joe", Connector.And);
-            _persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
+            _seedDbContext.Persons.Where(dynamicFilter).ToList().Count.Should().Equals(2);
         }
 
         private List<Person> Seed()
