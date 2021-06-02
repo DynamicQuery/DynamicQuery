@@ -16,7 +16,7 @@ namespace DynamicQuery.QueryBuilder.Builders
 
         public DynamicQueryGroupBuilderConnector Filter { get; set; }
         public DynamicProjectionBuilder Select { get; private set; }
-        public QueryLogic Builder() => _screeningLogic;
+        public QueryLogic Build() => _screeningLogic;
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DynamicFilter.Common;
+using DynamicFilter.Common.Interfaces;
 using DynamicQuery.QueryBuilder.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,15 +26,25 @@ namespace DynamicQuery.QueryBuilder.Builders
 
         public DynamicQueryBuilder Then { get; private set; }
 
+        public DynamicQueryGroupBuilder By(string propertyId, IOperation operation, Connector connector = Connector.None)
+             => By(propertyId, operation, connector);
+
         public DynamicQueryGroupBuilder By(string propertyId, string operation, Connector connector = Connector.None)
         {
             return By(propertyId, operation, null, null, connector);
         }
 
+        public DynamicQueryGroupBuilder By(string propertyId, IOperation operation, string value, Connector connector = Connector.None)
+             => By(propertyId, operation, value, connector);
+
+
         public DynamicQueryGroupBuilder By(string propertyId, string operation, string value, Connector connector = Connector.None)
         {
             return By(propertyId, operation, value, null, connector);
         }
+
+        public DynamicQueryGroupBuilder By(string propertyId, IOperation operation, string value, string value2, Connector connector = Connector.None)
+             => By(propertyId, operation, value, value2, connector);
 
         public DynamicQueryGroupBuilder By(string propertyId, string operation, string value, string value2, Connector connector = Connector.None)
         {
