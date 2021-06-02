@@ -4,8 +4,9 @@
 
 <img src="DynamicQuery/Images/DynamicFilter.jpg" width="200" height="160">
 
-DynamicSelect is a library aimed at allowing developers to easily shape thier data at run time by specifying the
-fields that they want. It would then automatically perform the neccessary joins for you through `EntityFramework Core`.
+DynamicFilter is a library aimed at allowing developers to easily filter their data at run time by specifying the
+`field name`, `filter operations`, `values` and `logical connectors` that are used for the filter.
+It would then dynamically translate the filters and construct the sql using an `ORM`
 
 # Example
 ```cs
@@ -72,8 +73,8 @@ fields that they want. It would then automatically perform the neccessary joins 
 
 <img src="DynamicQuery/Images/DynamicSelect.jpg" width="200" height="160">
 
-DynamicSelect is a library aimed at allowing developers to easily shape thier data at run time by specifying the
-fields that they want. It would then automatically perform the neccessary joins for you through `EntityFramework Core`.
+DynamicSelect is a library aimed at allowing developers to easily shape their data at run time by specifying the
+fields that they want. It would then dynamically perform the neccessary joins for you through `EntityFramework Core`.
 
 # Example
 
