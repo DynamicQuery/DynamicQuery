@@ -1,4 +1,57 @@
+# DynamicQuery
 
+<img src="DynamicQuery/Images/DynamicQuery.jpg" width="200" height="160">
+
+DynamicQuery is a library aimed at allowing developers to easily filter and shape their data at run time by specifying the
+`field name`, `filter operations`, `values` and `logical connectors` that are used for the filter, and field names used for selecting the columns, all at runtime.
+You could also do it via compile time easily like the example given below. 
+It would then dynamically translate the filters, perform necessary table joins and pagination, to obtain the required columns.
+
+
+# Example
+
+```cs
+public class DynamicQueryExample
+    {
+        public static void Run()
+        {
+            SeedDbContext seedDbContext = SeedDbContext.Create();
+
+            DynamicQueryBuilder dynamicQueryBuilder = new DynamicQueryBuilder();
+
+            QueryLogic queryLogic = dynamicQueryBuilder.Filter
+                                                            .AddGroup()
+                                                                .By("Gender", Operations.EqualTo, "M")
+                                                                .By("MyName.Name", Operations.Contains, "Malfoy", Connector.And)
+                                                        .Then
+                                                        .Select
+                                                            .Fields("Id", "MyName.Name", "Gender")
+                                                            .And
+                                                            .Paginate(page: 1, pageSize: 1)
+                                                        .Then
+                                                        .Build();
+
+            dynamic result = new DynamicQueryRunner().Build(seedDbContext.Persons, queryLogic).ToDynamicList();
+
+            string json = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            Console.WriteLine(json);
+        }
+    }
+```
+# Result
+
+```json
+[
+  {
+    "Id": 2,
+    "MyName": {
+      "Name": "Draco Malfoy"
+    },
+    "Gender": "M"
+  }
+]
+```
 
 # DynamicFilter
 
@@ -9,6 +62,7 @@ DynamicFilter is a library aimed at allowing developers to easily filter their d
 It would then dynamically translate the filters and construct the sql using an `ORM`
 
 # Example
+
 ```cs
     public static class DynamicFilterExample
     {
