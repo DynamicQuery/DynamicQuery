@@ -13,10 +13,7 @@ namespace Tests.Common
             DbContextOptionsBuilder<SeedDbContext> dbContextOptionsBuilder =
                 new DbContextOptionsBuilder<SeedDbContext>().UseInMemoryDatabase(Guid.NewGuid().ToString());
 
-            _seedDbContext = new SeedDbContext(dbContextOptionsBuilder.Options);
-
-            _seedDbContext.Persons.AddRange(SeedDbContext.Seed());
-            _seedDbContext.SaveChanges();
+            _seedDbContext = SeedDbContext.Create();
 
         }
     }

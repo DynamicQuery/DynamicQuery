@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DynamicFilter\DynamicFilter.csproj" />
+    <ProjectReference Include="..\DynamicQuery\DynamicQuery.csproj" />
+    <ProjectReference Include="..\DynamicSelect\DynamicSelect.csproj" />
+    <ProjectReference Include="..\Seed\Seed.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Seed.Models;
 using Seed.Persistence.Configuration;
+using System;
 using System.Collections.Generic;
 
 namespace Seed
@@ -13,6 +14,19 @@ namespace Seed
         }
 
         public DbSet<Person> Persons { get; set; }
+
+        public static SeedDbContext Create(string dbName = null)
+        {
+            DbContextOptionsBuilder<SeedDbContext> dbContextOptionsBuilder =
+                new DbContextOptionsBuilder<SeedDbContext>().UseInMemoryDatabase(dbName == null ? Guid.NewGuid().ToString() : dbName);
+
+            SeedDbContext seedDbContext = new SeedDbContext(dbContextOptionsBuilder.Options);
+
+            seedDbContext.Persons.AddRange(SeedDbContext.Seed());
+            seedDbContext.SaveChanges();
+
+            return seedDbContext;
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

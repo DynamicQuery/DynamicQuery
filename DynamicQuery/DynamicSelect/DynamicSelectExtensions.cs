@@ -7,7 +7,7 @@ namespace DynamicSelect
 {
     public static class DynamicSelectExtensions
     {
-        public static IQueryable ProjectToDynamic<T>(this IQueryable<T> queryable, IEnumerable<string> propertyIds)
+        public static IQueryable ProjectToDynamic<T>(this IQueryable<T> queryable, params string[] propertyIds)
             where T : class
         {
             Node root = new Node();

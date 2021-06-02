@@ -1,6 +1,5 @@
 ﻿using DynamicSelect;
 using FluentAssertions;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
@@ -15,33 +14,20 @@ namespace Tests.DynamicSelect
         [Fact]
         public void DynamicSelect_Test()
         {
-            List<string> fieldsToSelect = new List<string>()
-            {
-                "Gender"
-            };
-
-            List<dynamic> result = GetResult(fieldsToSelect);
+            
+            List<dynamic> result = GetResult("Gender");
             result.Any().Should().BeTrue();
             result.ForEach(x => ((string)x.Gender).Should().NotBeNullOrEmpty());
 
 
-            fieldsToSelect = new List<string>()
-            {
-                "Gender", "MyName.Name"
-            };
 
-            result = GetResult(fieldsToSelect);
+            result = GetResult("Gender", "MyName.Name");
             result.Any().Should().BeTrue();
             result.ForEach(x => ((string)x.Gender).Should().NotBeNullOrEmpty());
             result.ForEach(x => ((string)x.MyName.Name).Should().NotBeNullOrEmpty());
 
 
-            fieldsToSelect = new List<string>()
-            {
-                "Gender", "MyName.Name", "Departments[Name]"
-            };
-
-            result = GetResult(fieldsToSelect);
+            result = GetResult("Gender", "MyName.Name", "Departments[Name]");
             result.Any().Should().BeTrue();
             result.ForEach(x => ((string)x.Gender).Should().NotBeNullOrEmpty());
             result.ForEach(x => ((string)x.MyName.Name).Should().NotBeNullOrEmpty());
@@ -55,13 +41,7 @@ namespace Tests.DynamicSelect
                 }
             });
 
-
-            fieldsToSelect = new List<string>()
-            {
-                "Gender", "MyName.Name", "Departments[Name]", "Departments[Sections[Name]]"
-            };
-
-            result = GetResult(fieldsToSelect);
+            result = GetResult("Gender", "MyName.Name", "Departments[Name]", "Departments[Sections[Name]]");
             
             result.Any().Should().BeTrue();
             result.ForEach(x => ((string)x.Gender).Should().NotBeNullOrEmpty());
@@ -83,7 +63,7 @@ namespace Tests.DynamicSelect
             });
         }
 
-        private List<dynamic> GetResult(List<string> fieldsToSelect)
+        private List<dynamic> GetResult(params string[] fieldsToSelect)
             => _seedDbContext.Persons.ProjectToDynamic(fieldsToSelect).ToDynamicList();
     }
 
