@@ -1,3 +1,5 @@
+![DynamicQuery workflow status](https://github.com/wireless90/DynamicQuery/actions/workflows/dotnet.yml/badge.svg)
+
 # DynamicQuery
 
 <img src="DynamicQuery/Images/DynamicQuery.jpg" width="200" height="160">
