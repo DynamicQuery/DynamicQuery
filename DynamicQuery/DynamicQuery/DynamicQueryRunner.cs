@@ -12,20 +12,20 @@ namespace DynamicQuery
     {
         public IQueryable Build<TEntity>(IQueryable<TEntity> entities, QueryLogic queryLogic) where TEntity : class
         {
-            DynamicFilter<TEntity> filter = CreateFilters<TEntity>(queryLogic.QueryGroups);
+            Filter<TEntity> filter = CreateFilters<TEntity>(queryLogic.QueryGroups);
             return entities.Where(filter).ProjectToDynamic(queryLogic.Projection.Selections.ToArray());
         }
 
 
         public IQueryable Build<TEntity>(DbSet<TEntity> entities, QueryLogic queryLogic) where TEntity : class
         {
-            DynamicFilter<TEntity> filter = CreateFilters<TEntity>(queryLogic.QueryGroups);
+            Filter<TEntity> filter = CreateFilters<TEntity>(queryLogic.QueryGroups);
             return entities.Where(filter).ProjectToDynamic(queryLogic.Projection.Selections.ToArray());
         }
 
-        private DynamicFilter<TEntity> CreateFilters<TEntity>(List<QueryGroup> queryGroups) where TEntity : class
+        private Filter<TEntity> CreateFilters<TEntity>(List<QueryGroup> queryGroups) where TEntity : class
         {
-            DynamicFilter<TEntity> filter = new DynamicFilter<TEntity>();
+            Filter<TEntity> filter = new Filter<TEntity>();
             for (int queryGroupIndex = 0; queryGroupIndex < queryGroups.Count; queryGroupIndex++)
             {
                 QueryGroup queryGroup = queryGroups[queryGroupIndex];

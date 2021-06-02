@@ -14,8 +14,7 @@ namespace DynamicFilter
     /// Aggregates <see cref="DynamicFilterStatement{TPropertyType}" /> and build them into a LINQ expression.
     /// </summary>
     /// <typeparam name="TClass"></typeparam>
-    [Serializable]
-    public class DynamicFilter<TClass> : IDynamicFilter where TClass : class
+    public class Filter<TClass> : IDynamicFilter where TClass : class
     {
         private readonly List<List<IDynamicFilterStatement>> _statementGroups;
         private readonly IOperationHelper _operationHelper;
@@ -51,16 +50,16 @@ namespace DynamicFilter
         }
 
         /// <summary>
-        /// Instantiates a new <see cref="DynamicFilter{TClass}" />
+        /// Instantiates a new <see cref="Filter{TClass}" />
         /// </summary>
-        public DynamicFilter()
+        public Filter()
         {
             _statementGroups = new List<List<IDynamicFilterStatement>> { new List<IDynamicFilterStatement>() };
             _operationHelper = new OperationHelper();
         }
 
         /// <summary>
-        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="DynamicFilter{TClass}" />.
+        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="Filter{TClass}" />.
         /// (To be used by <see cref="IOperation" /> that need no values)
         /// </summary>
         /// <param name="propertyId">Property identifier conventionalized by for the Expression Builder.</param>
@@ -73,7 +72,7 @@ namespace DynamicFilter
         }
 
         /// <summary>
-        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="DynamicFilter{TClass}" />.
+        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="Filter{TClass}" />.
         /// (To be used by <see cref="IOperation" /> that need no values)
         /// </summary>
         /// <param name="propertyId">Property identifier conventionalized by for the Expression Builder.</param>
@@ -85,7 +84,7 @@ namespace DynamicFilter
         }
 
         /// <summary>
-        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="DynamicFilter{TClass}" />.
+        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="Filter{TClass}" />.
         /// </summary>
         /// <typeparam name="TPropertyType"></typeparam>
         /// <param name="propertyId">Property identifier conventionalized by for the Expression Builder.</param>
@@ -99,7 +98,7 @@ namespace DynamicFilter
         }
 
         /// <summary>
-        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="DynamicFilter{TClass}" />.
+        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="Filter{TClass}" />.
         /// </summary>
         /// <typeparam name="TPropertyType"></typeparam>
         /// <param name="propertyId">Property identifier conventionalized by for the Expression Builder.</param>
@@ -114,7 +113,7 @@ namespace DynamicFilter
         }
 
         /// <summary>
-        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="DynamicFilter{TClass}" />.
+        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="Filter{TClass}" />.
         /// </summary>
         /// <typeparam name="TPropertyType"></typeparam>
         /// <param name="propertyId">Property identifier conventionalized by for the Expression Builder.</param>
@@ -128,7 +127,7 @@ namespace DynamicFilter
         }
 
         /// <summary>
-        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="DynamicFilter{TClass}" />.
+        /// Adds a new <see cref="DynamicFilterStatement{TPropertyType}" /> to the <see cref="Filter{TClass}" />.
         /// </summary>
         /// <typeparam name="TPropertyType"></typeparam>
         /// <param name="propertyId">Property identifier conventionalized by for the Expression Builder.</param>
@@ -163,7 +162,7 @@ namespace DynamicFilter
         }
 
         /// <summary>
-        /// Removes all <see cref="DynamicFilterStatement{TPropertyType}" />, leaving the <see cref="DynamicFilter{TClass}" /> empty.
+        /// Removes all <see cref="DynamicFilterStatement{TPropertyType}" />, leaving the <see cref="Filter{TClass}" /> empty.
         /// </summary>
         public void Clear()
         {
@@ -172,27 +171,27 @@ namespace DynamicFilter
         }
 
         /// <summary>
-        /// Implicitly converts a <see cref="DynamicFilter{TClass}" /> into a <see cref="Func{TClass, TResult}" />.
+        /// Implicitly converts a <see cref="Filter{TClass}" /> into a <see cref="Func{TClass, TResult}" />.
         /// </summary>
         /// <param name="filter"></param>
-        public static implicit operator Func<TClass, bool>(DynamicFilter<TClass> filter)
+        public static implicit operator Func<TClass, bool>(Filter<TClass> filter)
         {
             var builder = new DynamicFilterBuilder();
             return builder.GetExpression<TClass>(filter).Compile();
         }
 
         /// <summary>
-        /// Implicitly converts a <see cref="DynamicFilter{TClass}" /> into a <see cref="System.Linq.Expressions.Expression{Func{TClass, TResult}}" />.
+        /// Implicitly converts a <see cref="Filter{TClass}" /> into a <see cref="System.Linq.Expressions.Expression{Func{TClass, TResult}}" />.
         /// </summary>
         /// <param name="filter"></param>
-	    public static implicit operator Expression<Func<TClass, bool>>(DynamicFilter<TClass> filter)
+	    public static implicit operator Expression<Func<TClass, bool>>(Filter<TClass> filter)
         {
             var builder = new DynamicFilterBuilder();
             return builder.GetExpression<TClass>(filter);
         }
 
         /// <summary>
-        /// String representation of <see cref="DynamicFilter{TClass}" />.
+        /// String representation of <see cref="Filter{TClass}" />.
         /// </summary>
         /// <returns></returns>
         public override string ToString()

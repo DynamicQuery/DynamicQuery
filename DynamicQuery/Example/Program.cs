@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            DynamicSelectExample.Run();
+            //DynamicSelectExample.Run();
+            DynamicFilterExample.Run();
         }
     }
 }
