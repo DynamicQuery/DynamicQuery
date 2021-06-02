@@ -1,4 +1,4 @@
-<img src="../DynamicQuery/Images/DynamicSelect.jpg" width="200" height="160">
+<img src="https://github.com/DynamicQuery/DynamicQuery/blob/main/DynamicQuery/Images/DynamicSelect.jpg?raw=true" width="200" height="160">
 
 # DynamicSelect
 
