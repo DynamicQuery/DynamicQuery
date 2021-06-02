@@ -1,37 +1,67 @@
-## Welcome to GitHub Pages
+<img src="DynamicQuery/Images/DynamicSelect.jpg" width="200" height="160">
 
-You can use the [editor on GitHub](https://github.com/wireless90/DynamicQuery/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+# DynamicSelect
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+DynamicSelect is a library aimed at allowing developers to easily shape thier data at run time by specifying the
+fields that they want. It would then automatically perform the neccessary joins for you through `EntityFramework Core`.
 
-### Markdown
+# Example
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+```cs
+    public static class DynamicSelectExample
+    {
+        public static void Run()
+        {
+            SeedDbContext seedDbContext = SeedDbContext.Create();
 
-```markdown
-Syntax highlighted code block
+            
+            dynamic result = seedDbContext.Persons.ProjectToDynamic(
+                "Id", "Gender", "MyName.Name", "Departments[Name]", "Departments[Sections[Name]]"
+                );
 
-# Header 1
-## Header 2
-### Header 3
+            string json = JsonConvert.SerializeObject(result, Formatting.Indented);
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+            Console.WriteLine(json);
+        }
+    }
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+# Result
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/wireless90/DynamicQuery/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+```json
+[
+  {
+    "Id": 1,
+    "Gender": "F",
+    "MyName": {
+      "Name": "Jane Doe"
+    },
+    "Departments": [
+      {
+        "Name": "IT",
+        "Sections": [
+          {
+            "Name": "IT-A"
+          },
+          {
+            "Name": "IT-B"
+          }
+        ]
+      },
+      {
+        "Name": "HR",
+        "Sections": [
+          {
+            "Name": "HR-A"
+          },
+          {
+            "Name": "HR-B"
+          },
+          {
+            "Name": "HR-C"
+          }
+        ]
+      }
+    ]
+  }]
+```
