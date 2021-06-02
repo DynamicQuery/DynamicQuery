@@ -1,5 +1,4 @@
 # DynamicQuery
-DynamicQuery is a library aimed at allowing developers to easily filter and shape their data at run time.
 
 <img src="DynamicQuery/Images/DynamicQuery.jpg" width="200" height="160">
 
