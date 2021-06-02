@@ -1,11 +1,10 @@
-﻿# DynamicSelect
+﻿using DynamicSelect;
+using Newtonsoft.Json;
+using Seed;
+using System;
 
-DynamicSelect is a library aimed at allowing developers to easily shape thier data at run time by specifying the
-fields that they want. It would then automatically perform the neccessary joins for you through `EntityFramework Core`.
-
-# Example
-
-```cs
+namespace Example
+{
     public static class DynamicSelectExample
     {
         public static void Run()
@@ -22,4 +21,4 @@ fields that they want. It would then automatically perform the neccessary joins 
             Console.WriteLine(json);
         }
     }
-```
+}
