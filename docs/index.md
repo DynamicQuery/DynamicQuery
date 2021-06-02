@@ -68,9 +68,11 @@ It would then dynamically translate the filters and construct the sql using an `
 ```
 
 
+# DynamicSelect
+
+
 <img src="https://github.com/DynamicQuery/DynamicQuery/blob/main/DynamicQuery/Images/DynamicSelect.jpg?raw=true" width="200" height="160">
 
-# DynamicSelect
 
 DynamicSelect is a library aimed at allowing developers to easily shape thier data at run time by specifying the
 fields that they want. It would then automatically perform the neccessary joins for you through `EntityFramework Core`.
