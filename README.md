@@ -2,12 +2,60 @@
 
 # DynamicQuery
 
-<img src="DynamicQuery/Images/DynamicQuery.jpg" width="200" height="160">
+<img src="DynamicQuery/Images/full.jpg" width="1022" height="220">
 
 DynamicQuery is a library aimed at allowing developers to easily filter and shape their data at run time by specifying the
 `field name`, `filter operations`, `values` and `logical connectors` that are used for the filter, and field names used for selecting the columns, all at runtime.
 You could also do it via compile time easily like the example given below. 
 It would then dynamically translate the filters, perform necessary table joins and pagination, to obtain the required columns.
+
+In its core, it uses 2 modules, `DynamicFilter` and `DynamicSelect`, each solving a problem unique to it, `Filtering` and `Selecting` respectively.
+
+## DynamicQueryRunner
+
+This class is responsible to translate a `QueryLogic` into sql with the help of `EntityFramework Core`.
+A `QueryLogic` is an object that contains the filters that need to be used, and the fields that need to be selected, and how pagination should be done.
+
+It could be populated by the front end and deserialized by the backend using Web Api.
+
+### How QueryLogic looks like serialized
+
+```json
+{
+  "QueryGroups": [
+    {
+      "Queries": [
+        {
+          "PropertyId": "Gender",
+          "Operation": "EqualTo",
+          "Value": "M"
+        },
+        {
+          "Connector": "AND",
+          "PropertyId": "MyName.Name",
+          "Operation": "Contains",
+          "Value": "Malfoy"
+        }
+      ]
+    }
+  ],
+  "Projection": {
+    "Selections": [
+      "Id",
+      "MyName.Name",
+      "Gender"
+    ],
+    "PageSize": 1,
+    "Page": 1
+  }
+}
+```
+
+### DynamicQueryRunner Example
+
+```cs
+dynamic result = new DynamicQueryRunner().Build(seedDbContext.Persons, queryLogic).ToDynamicList();
+```
 
 
 # Example
