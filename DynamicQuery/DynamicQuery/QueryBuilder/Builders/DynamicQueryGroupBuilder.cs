@@ -27,7 +27,7 @@ namespace DynamicQuery.QueryBuilder.Builders
         public DynamicQueryBuilder Then { get; private set; }
 
         public DynamicQueryGroupBuilder By(string propertyId, IOperation operation, Connector connector = Connector.None)
-             => By(propertyId, operation, connector);
+             => By(propertyId, operation.ToString(), connector);
 
         public DynamicQueryGroupBuilder By(string propertyId, string operation, Connector connector = Connector.None)
         {
@@ -35,7 +35,7 @@ namespace DynamicQuery.QueryBuilder.Builders
         }
 
         public DynamicQueryGroupBuilder By(string propertyId, IOperation operation, string value, Connector connector = Connector.None)
-             => By(propertyId, operation, value, connector);
+             => By(propertyId, operation.ToString(), value, connector);
 
 
         public DynamicQueryGroupBuilder By(string propertyId, string operation, string value, Connector connector = Connector.None)
@@ -44,7 +44,7 @@ namespace DynamicQuery.QueryBuilder.Builders
         }
 
         public DynamicQueryGroupBuilder By(string propertyId, IOperation operation, string value, string value2, Connector connector = Connector.None)
-             => By(propertyId, operation, value, value2, connector);
+             => By(propertyId, operation.ToString(), value, value2, connector);
 
         public DynamicQueryGroupBuilder By(string propertyId, string operation, string value, string value2, Connector connector = Connector.None)
         {
