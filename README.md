@@ -1,8 +1,24 @@
 ![DynamicQuery workflow status](https://github.com/wireless90/DynamicQuery/actions/workflows/dotnet.yml/badge.svg)
 
+
 # DynamicQuery
 
 <img src="DynamicQuery/Images/full.jpg" width="1022" height="220">
+
+- [DynamicQuery](#dynamicquery)
+  * [DynamicQueryRunner](#dynamicqueryrunner)
+    + [How QueryLogic looks like serialized](#how-querylogic-looks-like-serialized)
+    + [DynamicQueryRunner Example](#dynamicqueryrunner-example)
+- [Example](#example)
+- [Result](#result)
+- [Supported types/operations](#supported-operations)
+- [DynamicFilter](#dynamicfilter)
+- [Example](#example-1)
+- [Result](#result-1)
+- [DynamicSelect](#dynamicselect)
+- [Example](#example-2)
+- [Result](#result-2)
+
 
 DynamicQuery is a library aimed at allowing developers to easily filter and shape their data at run time by specifying the
 `field name`, `filter operations`, `values` and `logical connectors` that are used for the filter, and field names used for selecting the columns, all at runtime.
@@ -102,6 +118,44 @@ public class DynamicQueryExample
   }
 ]
 ```
+
+# Supported Operations
+
+- Default
+  - EqualTo
+  - NotEqualTo
+- Text
+  - Contains
+  - DoesNotContain
+  - EndsWith
+  - EqualTo
+  - IsEmpty
+  - IsNotEmpty
+  - IsNotNull
+IsNotNullNorWhiteSpace
+IsNull
+IsNullOrWhiteSpace
+NotEqualTo
+StartsWith
+- Number
+  - Between
+  - EqualTo
+  - GreaterThan
+  - GreaterThanOrEqualTo
+  - LessThan
+  - LessThanOrEqualTo
+  - NotEqualTo
+- Boolean
+  - EqualTo
+  - NotEqualTo
+- Date
+  - Between
+  - EqualTo
+  - GreaterThan
+  - GreaterThanOrEqualTo
+  - LessThan
+  - LessThanOrEqualTo
+  - NotEqualTo
 
 # DynamicFilter
 
