@@ -107,7 +107,7 @@ public class DynamicQueryExample
 
 <img src="DynamicQuery/Images/DynamicFilter.jpg" width="200" height="160">
 
-DynamicFilter is a library aimed at allowing developers to easily filter their data at run time by specifying the
+If we don't need the selection capabilities and simply want to use filtering capabilities, just use DynamicFilter. DynamicFilter is a library aimed at allowing developers to easily filter their data at run time by specifying the
 `field name`, `filter operations`, `values` and `logical connectors` that are used for the filter.
 It would then dynamically translate the filters and construct the sql using an `ORM`
 
@@ -177,7 +177,7 @@ It would then dynamically translate the filters and construct the sql using an `
 
 <img src="DynamicQuery/Images/DynamicSelect.jpg" width="200" height="160">
 
-DynamicSelect is a library aimed at allowing developers to easily shape their data at run time by specifying the
+If we don't need the filtering capabilities and simply want to use the selection capabilities, just use DynamicSelect. DynamicSelect is a library aimed at allowing developers to easily shape their data at run time by specifying the
 fields that they want. It would then dynamically perform the neccessary joins for you through `EntityFramework Core`.
 
 # Example
