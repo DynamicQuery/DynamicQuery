@@ -132,11 +132,11 @@ public class DynamicQueryExample
   - IsEmpty
   - IsNotEmpty
   - IsNotNull
-IsNotNullNorWhiteSpace
-IsNull
-IsNullOrWhiteSpace
-NotEqualTo
-StartsWith
+  - IsNotNullNorWhiteSpace
+  - IsNull
+  - IsNullOrWhiteSpace
+  - NotEqualTo
+  - StartsWith
 - Number
   - Between
   - EqualTo
