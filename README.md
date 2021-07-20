@@ -84,7 +84,8 @@ public class DynamicQueryExample
             SeedDbContext seedDbContext = SeedDbContext.Create();
 
             DynamicQueryBuilder dynamicQueryBuilder = new DynamicQueryBuilder();
-
+           
+            //QueryLogic will prolly come in from front end and deserialized by backend.
             QueryLogic queryLogic = dynamicQueryBuilder.Filter
                                                             .AddGroup()
                                                                 .By("Gender", Operations.EqualTo, "M")
