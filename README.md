@@ -67,7 +67,7 @@ It could be populated by the front end and deserialized by the backend using Web
 }
 ```
 
-### DynamicQueryRunner Example
+### DynamicQueryRunner Single Liner Example
 
 ```cs
 dynamic result = new DynamicQueryRunner().Build(seedDbContext.Persons, queryLogic).ToDynamicList();
