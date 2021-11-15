@@ -20,6 +20,16 @@ namespace DynamicFilter.Common
             return GetMemberExpression((Expression)param, propertyName);
 
         }
+        public static Expression ConvertConstantToPropertyOrField(this ConstantExpression constant)
+        {
+            ConstantValueHolder<object> constantValueHolder = new ConstantValueHolder<object>
+            {
+                Value = constant.Value
+            };
+
+            return Expression.Convert(Expression.PropertyOrField(Expression.Constant(constantValueHolder), "Value"), constant.Value.GetType());
+
+        }
 
         private static MemberExpression GetMemberExpression(Expression param, string propertyName)
         {
@@ -38,7 +48,7 @@ namespace DynamicFilter.Common
         /// </summary>
         /// <param name="member">Member to which to methods will be applied.</param>
         /// <returns></returns>
-        public static Expression TrimToLower(this MemberExpression member)
+        public static Expression TrimToLower(this Expression member)
         {
             var trimMemberCall = Expression.Call(member, trimMethod);
             return Expression.Call(trimMemberCall, toLowerMethod);

@@ -16,17 +16,15 @@ namespace DynamicFilter.Operations
         /// <inheritdoc />
         public override Expression GetExpression(MemberExpression member, ConstantExpression constant1, ConstantExpression constant2)
         {
-            Expression constant = constant1;
-
             if (member.Type == typeof(string))
             {
-                constant = constant1.TrimToLower();
+                var toLowerExpression = constant1.ConvertConstantToPropertyOrField().TrimToLower();
 
-                return Expression.Equal(member.TrimToLower(), constant)
+                return Expression.Equal(member.TrimToLower(), toLowerExpression)
                        .AddNullCheck(member);
             }
 
-            return Expression.Equal(member, constant);
+            return Expression.Equal(member, constant1.ConvertConstantToPropertyOrField());
         }
     }
 }
