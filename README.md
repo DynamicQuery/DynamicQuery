@@ -16,6 +16,83 @@ _DynamicQuery_ is a library aimed at allowing developers to easily filter and sh
 
 In its core, it uses 2 modules, `DynamicFilter` and `DynamicSelect`, each solving a problem unique to it, `Filtering` and `Selecting` respectively.
 
+Let's take a look at them!
+
+# DynamicFilter
+
+DynamicFilter is a library aimed at allowing developers to easily filter their data at run time by specifying the `field name`, `filter operations`, `values` and `logical connectors` that are used for the filter.
+
+It would then translate the filters at runtime and construct the necessary expressions and feed it into `EntityFramework Core`.
+
+
+# Example
+
+Below is an example of filtering a `Person` object. Notice how you can input the `PropertyId`, the `Operation` and the `value`, as strings.
+
+Thus, you can easily obtain these info using a Web API and feed into it as well!
+
+Notice how elegant and readable it is.
+
+```cs
+    public static class DynamicFilterExample
+    {
+        public static void Run()
+        {
+            SeedDbContext seedDbContext = SeedDbContext.Create();
+            
+            Filter<Person> filter = new Filter<Person>();
+
+            filter
+                .By("Gender", Operations.EqualTo, "M")
+                .And
+                .By("MyName.Name", "Contains", "Malfoy");
+
+            List<Person> result = seedDbContext.Persons.Where(filter).ToList();
+
+            string json = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            Console.WriteLine(json);
+        }
+    }
+```
+
+# Result
+
+```json
+[
+  {
+    "Id": 2,
+    "Gender": "M",
+    "MyName": {
+      "Id": 2,
+      "Name": "Draco Malfoy"
+    },
+    "Departments": [
+      {
+        "Id": 3,
+        "Name": "IT",
+        "Sections": [
+          {
+            "Id": 6,
+            "Name": "IT-A"
+          }
+        ]
+      },
+      {
+        "Id": 4,
+        "Name": "HR",
+        "Sections": [
+          {
+            "Id": 7,
+            "Name": "HR-A"
+          }
+        ]
+      }
+    ]
+  }
+]
+```
+
 ## DynamicQueryRunner
 
 This class is responsible to translate a `QueryLogic` into sql with the help of `EntityFramework Core`.
@@ -147,74 +224,7 @@ public class DynamicQueryExample
   - LessThanOrEqualTo
   - NotEqualTo
 
-# DynamicFilter
 
-
-If we don't need the selection capabilities and simply want to use filtering capabilities, just use DynamicFilter. DynamicFilter is a library aimed at allowing developers to easily filter their data at run time by specifying the
-`field name`, `filter operations`, `values` and `logical connectors` that are used for the filter.
-It would then dynamically translate the filters and construct the sql using an `ORM`
-
-# Example
-
-```cs
-    public static class DynamicFilterExample
-    {
-        public static void Run()
-        {
-            SeedDbContext seedDbContext = SeedDbContext.Create();
-
-            Filter<Person> filter = new Filter<Person>();
-
-            filter
-                .By("Gender", Operations.EqualTo, "M")
-                .And
-                .By("MyName.Name", Operations.Contains, "Malfoy");
-
-            List<Person> result = seedDbContext.Persons.Where(filter).ToList();
-
-            string json = JsonConvert.SerializeObject(result, Formatting.Indented);
-
-            Console.WriteLine(json);
-        }
-    }
-```
-
-# Result
-
-```json
-[
-  {
-    "Id": 2,
-    "Gender": "M",
-    "MyName": {
-      "Id": 2,
-      "Name": "Draco Malfoy"
-    },
-    "Departments": [
-      {
-        "Id": 3,
-        "Name": "IT",
-        "Sections": [
-          {
-            "Id": 6,
-            "Name": "IT-A"
-          }
-        ]
-      },
-      {
-        "Id": 4,
-        "Name": "HR",
-        "Sections": [
-          {
-            "Id": 7,
-            "Name": "HR-A"
-          }
-        ]
-      }
-    ]
-  }
-]
-```
 
 # DynamicSelect
 
