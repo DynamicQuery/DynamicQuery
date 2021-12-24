@@ -3,27 +3,16 @@
 
 # DynamicQuery
 
-<img src="DynamicQuery/Images/full.jpg" width="1022" height="220">
+Are you sick of configuring and teaching your team _GraphQL_?
 
-- [DynamicQuery](#dynamicquery)
-  * [DynamicQueryRunner](#dynamicqueryrunner)
-    + [How QueryLogic looks like serialized](#how-querylogic-looks-like-serialized)
-    + [DynamicQueryRunner Example](#dynamicqueryrunner-example)
-- [Example](#example)
-- [Result](#result)
-- [Supported types/operations](#supported-operations)
-- [DynamicFilter](#dynamicfilter)
-- [Example](#example-1)
-- [Result](#result-1)
-- [DynamicSelect](#dynamicselect)
-- [Example](#example-2)
-- [Result](#result-2)
+Or are you puzzled at why _OData_ queries seem unreadable and hard to construct? 
 
+Or are you experiencing the _over-fetching_ and _under-fetching_ problems brought by RESTful APIs?
 
-DynamicQuery is a library aimed at allowing developers to easily filter and shape their data at run time by specifying the
+_DynamicQuery_ is a library aimed at allowing developers to easily filter and shape their data at run time by specifying the
 `field name`, `filter operations`, `values` and `logical connectors` that are used for the filter, and field names used for selecting the columns, all at runtime.
-You could also do it via compile time easily like the example given below. 
-It would then dynamically translate the filters, perform necessary table joins and pagination, to obtain the required columns.
+
+**It would then dynamically translate the filters, perform necessary table joins and pagination**, to obtain the required columns.
 
 In its core, it uses 2 modules, `DynamicFilter` and `DynamicSelect`, each solving a problem unique to it, `Filtering` and `Selecting` respectively.
 
@@ -160,7 +149,6 @@ public class DynamicQueryExample
 
 # DynamicFilter
 
-<img src="DynamicQuery/Images/DynamicFilter.jpg" width="200" height="160">
 
 If we don't need the selection capabilities and simply want to use filtering capabilities, just use DynamicFilter. DynamicFilter is a library aimed at allowing developers to easily filter their data at run time by specifying the
 `field name`, `filter operations`, `values` and `logical connectors` that are used for the filter.
@@ -230,7 +218,6 @@ It would then dynamically translate the filters and construct the sql using an `
 
 # DynamicSelect
 
-<img src="DynamicQuery/Images/DynamicSelect.jpg" width="200" height="160">
 
 If we don't need the filtering capabilities and simply want to use the selection capabilities, just use DynamicSelect. DynamicSelect is a library aimed at allowing developers to easily shape their data at run time by specifying the
 fields that they want. It would then dynamically perform the neccessary joins for you through `EntityFramework Core`.
