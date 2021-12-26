@@ -93,6 +93,72 @@ Notice how elegant and readable it is.
 ]
 ```
 
+# DynamicSelect
+
+
+If we don't need the filtering capabilities and simply want to use the selection capabilities, just use DynamicSelect. DynamicSelect is a library aimed at allowing developers to easily shape their data at run time by specifying the
+fields that they want. It would then dynamically perform the neccessary joins for you through `EntityFramework Core`.
+
+# Example
+
+```cs
+    public static class DynamicSelectExample
+    {
+        public static void Run()
+        {
+            SeedDbContext seedDbContext = SeedDbContext.Create();
+
+            
+            dynamic result = seedDbContext.Persons.ProjectToDynamic(
+                "Id", "Gender", "MyName.Name", "Departments[Name]", "Departments[Sections[Name]]"
+                );
+
+            string json = JsonConvert.SerializeObject(result, Formatting.Indented);
+
+            Console.WriteLine(json);
+        }
+    }
+```
+
+# Result
+
+```json
+[
+  {
+    "Id": 1,
+    "Gender": "F",
+    "MyName": {
+      "Name": "Jane Doe"
+    },
+    "Departments": [
+      {
+        "Name": "IT",
+        "Sections": [
+          {
+            "Name": "IT-A"
+          },
+          {
+            "Name": "IT-B"
+          }
+        ]
+      },
+      {
+        "Name": "HR",
+        "Sections": [
+          {
+            "Name": "HR-A"
+          },
+          {
+            "Name": "HR-B"
+          },
+          {
+            "Name": "HR-C"
+          }
+        ]
+      }
+    ]
+  }]
+  ```
 ## DynamicQueryRunner
 
 This class is responsible to translate a `QueryLogic` into sql with the help of `EntityFramework Core`.
@@ -225,70 +291,3 @@ public class DynamicQueryExample
   - NotEqualTo
 
 
-
-# DynamicSelect
-
-
-If we don't need the filtering capabilities and simply want to use the selection capabilities, just use DynamicSelect. DynamicSelect is a library aimed at allowing developers to easily shape their data at run time by specifying the
-fields that they want. It would then dynamically perform the neccessary joins for you through `EntityFramework Core`.
-
-# Example
-
-```cs
-    public static class DynamicSelectExample
-    {
-        public static void Run()
-        {
-            SeedDbContext seedDbContext = SeedDbContext.Create();
-
-            
-            dynamic result = seedDbContext.Persons.ProjectToDynamic(
-                "Id", "Gender", "MyName.Name", "Departments[Name]", "Departments[Sections[Name]]"
-                );
-
-            string json = JsonConvert.SerializeObject(result, Formatting.Indented);
-
-            Console.WriteLine(json);
-        }
-    }
-```
-
-# Result
-
-```json
-[
-  {
-    "Id": 1,
-    "Gender": "F",
-    "MyName": {
-      "Name": "Jane Doe"
-    },
-    "Departments": [
-      {
-        "Name": "IT",
-        "Sections": [
-          {
-            "Name": "IT-A"
-          },
-          {
-            "Name": "IT-B"
-          }
-        ]
-      },
-      {
-        "Name": "HR",
-        "Sections": [
-          {
-            "Name": "HR-A"
-          },
-          {
-            "Name": "HR-B"
-          },
-          {
-            "Name": "HR-C"
-          }
-        ]
-      }
-    ]
-  }]
-```
