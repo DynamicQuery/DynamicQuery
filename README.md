@@ -20,6 +20,8 @@ Let's take a look at them!
 
 # DynamicFilter
 
+Let's say we need to filter our collection of data. However, we do not know what is the operation used to filter, or how many filters are used, or whether to `OR` the filters or `AND` the filters.
+
 DynamicFilter is a library aimed at allowing developers to easily filter their data at run time by specifying the `field name`, `filter operations`, `values` and `logical connectors` that are used for the filter.
 
 It would then translate the filters at runtime and construct the necessary expressions and feed it into `EntityFramework Core`.
