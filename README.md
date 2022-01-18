@@ -163,10 +163,15 @@ fields that they want. It would then dynamically perform the neccessary joins fo
   ```
 ## DynamicQueryRunner
 
-This class is responsible to translate a `QueryLogic` into sql with the help of `EntityFramework Core`.
+Now if we want both filtering and selection capabilities, thats when we use `DynamicQueryRunner`, which is a 1 liner easy set-up solution as compared to `OData` or `GraphQL`.
+
+`DynamicQueryRunner` is our querying engine that is responsible to translate a given `QueryLogic` into sql with the help of `EntityFramework Core`.
+
 A `QueryLogic` is an object that contains the filters that need to be used, and the fields that need to be selected, and how pagination should be done.
 
 It could be populated by the front end and deserialized by the backend using Web Api.
+
+Let's take a look at how a `QueryLogic` looks like!
 
 ### How QueryLogic looks like serialized
 
@@ -200,6 +205,9 @@ It could be populated by the front end and deserialized by the backend using Web
   }
 }
 ```
+
+
+Once we received a `QueryLogic`, we then feed it into our `DynamicQueryRunner`(1 liner solution) and viola! We get the results!
 
 ### DynamicQueryRunner Single Liner Example
 
