@@ -213,17 +213,17 @@ We can even create static queries by creating them ourselves with our `DynamicQu
 An example below!
 
 ```cs
-QueryLogic queryLogic = dynamicQueryBuilder.Filter
-                                            .AddGroup()
-                                                .By("Gender", Operations.EqualTo, "M")
-                                                .By("MyName.Name", Operations.Contains, "Malfoy", Connector.And)
-                                        .Then
-                                        .Select
-                                            .Fields("Id", "MyName.Name", "Gender")
-                                            .And
-                                            .Paginate(page: 1, pageSize: 1)
-                                        .Then
-                                        .Build();
+QueryLogic queryLogic = new DynamicQueryBuilder().Filter
+                                                    .AddGroup()
+                                                        .By("Gender", Operations.EqualTo, "M")
+                                                        .By("MyName.Name", Operations.Contains, "Malfoy", Connector.And)
+                                                .Then
+                                                .Select
+                                                    .Fields("Id", "MyName.Name", "Gender")
+                                                    .And
+                                                    .Paginate(page: 1, pageSize: 1)
+                                                .Then
+                                                .Build();
 ```
 
 Once we received a `QueryLogic`, we then feed it into our `DynamicQueryRunner`(1 liner solution) and viola! We get the results!
@@ -245,17 +245,17 @@ public class DynamicQueryExample
             SeedDbContext seedDbContext = SeedDbContext.Create();
 
             //QueryLogic will prolly come in from front end and deserialized by backend.
-            QueryLogic queryLogic = dynamicQueryBuilder.Filter
+            QueryLogic queryLogic = new DynamicQueryBuilder().Filter
                                                             .AddGroup()
                                                                 .By("Gender", Operations.EqualTo, "M")
                                                                 .By("MyName.Name", Operations.Contains, "Malfoy", Connector.And)
-                                                        .Then
-                                                        .Select
-                                                            .Fields("Id", "MyName.Name", "Gender")
-                                                            .And
-                                                            .Paginate(page: 1, pageSize: 1)
-                                                        .Then
-                                                        .Build();
+                                                            .Then
+                                                            .Select
+                                                                .Fields("Id", "MyName.Name", "Gender")
+                                                                .And
+                                                                .Paginate(page: 1, pageSize: 1)
+                                                            .Then
+                                                            .Build();
 
             dynamic result = new DynamicQueryRunner().Build(seedDbContext.Persons, queryLogic).ToDynamicList();
 
