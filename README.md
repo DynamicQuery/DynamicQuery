@@ -206,6 +206,25 @@ Let's take a look at how a `QueryLogic` looks like!
 }
 ```
 
+We can even create static queries by creating them ourselves with our `DynamicQueryBuilder` which heavily emphasizes in fluent-styled programming. 
+
+`DynamicQueryBuilder ` helps create `QueryLogics`.
+
+An example below!
+
+```cs
+QueryLogic queryLogic = dynamicQueryBuilder.Filter
+                                                            .AddGroup()
+                                                                .By("Gender", Operations.EqualTo, "M")
+                                                                .By("MyName.Name", Operations.Contains, "Malfoy", Connector.And)
+                                                        .Then
+                                                        .Select
+                                                            .Fields("Id", "MyName.Name", "Gender")
+                                                            .And
+                                                            .Paginate(page: 1, pageSize: 1)
+                                                        .Then
+                                                        .Build();
+```
 
 Once we received a `QueryLogic`, we then feed it into our `DynamicQueryRunner`(1 liner solution) and viola! We get the results!
 
